@@ -2,20 +2,15 @@ import { Express, Request, Response } from "express";
 import {
   createUserSessionHandler,
   getUserSessionsHandler,
-} from "./controller/session.controller";
-import { createUserHandler } from "./controller/user.controller";
-import deserializedUser from "./middleware/deserializedUser";
-import requireUser from "./middleware/requireUser";
-import ValidateResource from "./middleware/validateResource";
-import authRoutes from "./routes/authRoutes";
-import { createSessionSchema } from "./schema/session.schema";
-import { createUserSchema } from "./schema/user.schema";
-
-export interface IAdditionalParams {
-  page: number;
-  limit: number;
-  sort: string;
-}
+} from "../controller/session.controller";
+import { createUserHandler } from "../controller/user.controller";
+import deserializedUser from "../middleware/deserializedUser";
+import requireUser from "../middleware/requireUser";
+import ValidateResource from "../middleware/validateResource";
+import authRoutes from "../routes/authRoutes";
+import { createSessionSchema } from "../schema/session.schema";
+import { createUserSchema } from "../schema/user.schema";
+import skillsRoutes from "./skillsRoute";
 
 const routes = (app: Express) => {
   app.post(
@@ -24,6 +19,7 @@ const routes = (app: Express) => {
     createUserSessionHandler
   );
   app.post("/api/users", ValidateResource(createUserSchema), createUserHandler);
+  app.use("/api/skills", skillsRoutes);
   app.use(requireUser);
   app.use("/api/auth", authRoutes);
 
