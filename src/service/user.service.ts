@@ -15,13 +15,12 @@ export async function createUser(
   }
 }
 
-export async function validatePassword({
-  email,
-  password,
-}: {
+interface Icredential {
   email: string;
   password: string;
-}) {
+}
+
+export async function validatePassword({ email, password }: Icredential) {
   const user = await UserModel.findOne({ email });
   if (!user) {
     return false;
