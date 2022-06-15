@@ -17,14 +17,13 @@ const routes = (app: Express) => {
     ValidateResource(createSessionSchema),
     createUserSessionHandler
   );
+  app.post("/api/users", ValidateResource(createUserSchema), createUserHandler);
   app.use(requireUser);
   app.use("/api/auth", authRoutes);
 
   app.get("/healthcheck", (req: Request, res: Response) => {
     res.sendStatus(200);
   });
-
-  app.post("/api/users", ValidateResource(createUserSchema), createUserHandler);
 
   app.get("/api/sessions", getUserSessionsHandler);
 
