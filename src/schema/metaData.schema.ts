@@ -1,6 +1,6 @@
 import { object, string, TypeOf } from "zod";
 
-export const createSkillSchema = object({
+export const createMetaDataSchema = object({
   body: object({
     description: string({
       required_error: "description is required field",
@@ -15,4 +15,4 @@ export const createSkillSchema = object({
   }),
 });
 
-export type CreateSkillInput = TypeOf<typeof createSkillSchema>;
+export type CreateMetaDataInput = TypeOf<typeof createMetaDataSchema>;
