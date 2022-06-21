@@ -4,13 +4,13 @@ import {
   getUserSessionsHandler,
 } from "../controller/session.controller";
 import { createUserHandler } from "../controller/user.controller";
-import deserializedUser from "../middleware/deserializedUser";
+
 import requireUser from "../middleware/requireUser";
 import ValidateResource from "../middleware/validateResource";
 import authRoutes from "../routes/authRoutes";
 import { createSessionSchema } from "../schema/session.schema";
 import { createUserSchema } from "../schema/user.schema";
-import skillsRoutes from "./skillsRoute";
+import metaDataRoutes from "./metaDataRoutes";
 
 const routes = (app: Express) => {
   app.post(
@@ -19,7 +19,7 @@ const routes = (app: Express) => {
     createUserSessionHandler
   );
   app.post("/api/users", ValidateResource(createUserSchema), createUserHandler);
-  app.use("/api/skills", skillsRoutes);
+  app.use("/api/meta-data", metaDataRoutes);
   app.use(requireUser);
   app.use("/api/auth", authRoutes);
 
@@ -35,3 +35,9 @@ const routes = (app: Express) => {
 };
 
 export default routes;
+
+export interface IAdditionalParams {
+  page: number;
+  limit: number;
+  sort: string;
+}
