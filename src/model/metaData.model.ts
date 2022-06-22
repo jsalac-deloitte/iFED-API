@@ -12,10 +12,12 @@ const MetaDataSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
+      trim: true,
     },
     type: {
       type: String,
       required: true,
+      trim: true,
     },
   },
   { timestamps: true }

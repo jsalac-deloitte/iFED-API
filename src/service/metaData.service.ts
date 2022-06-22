@@ -29,3 +29,15 @@ export async function getMetaData(id: string) {
     throw new Error(error);
   }
 }
+
+export async function deleteMetaData(id: string) {
+  try {
+    const metaData = await MetaDataModel.findById(id);
+    if (metaData) {
+      return await MetaDataModel.deleteOne({ _id: id });
+    }
+    return false;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
