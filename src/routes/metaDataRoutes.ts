@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import {
   createMetaDataHandler,
+  deleteMetaDataHandler,
   getAllHandler,
   getMetaDataHandler,
 } from "../controller/metaData.controller";
@@ -17,5 +18,6 @@ metaDataRoutes.post(
 
 metaDataRoutes.get("/:id", getMetaDataHandler);
 metaDataRoutes.get("/", getAllHandler);
+metaDataRoutes.delete("/:id", deleteMetaDataHandler);
 
 export default metaDataRoutes;
